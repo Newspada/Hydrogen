@@ -28,6 +28,4 @@ for i in range(2):
             return 2*pi*r*ψ[i](x, r)*ψ[j](x, r)
         H[i][j], err=sp.integrate.nquad(H_integrand, [[-np.inf, +np.inf], [0, +np.inf]])
         S[i][j], err=sp.integrate.nquad(S_integrand, [[-np.inf, +np.inf], [0, +np.inf]])
-print(H)
-print(S)
         

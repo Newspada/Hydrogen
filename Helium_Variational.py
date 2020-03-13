@@ -1,5 +1,5 @@
 import numpy as np
-from numpy import pi as π
+from numpy import pi
 import scipy as sp
 from scipy import linalg
 from scipy import integrate
@@ -27,11 +27,11 @@ S=np.zeros((N, N))
 Q=np.zeros((N, N, N, N)) #just creates F, H, S, Q tensors with random (zero) values
 for p in range(N):
         for q in range(N):
-                H[p][q]=3*α[p]*α[q]*π**1.5/(α[p]+α[q])**2.5-4*π/(α[p]+α[q])
-                S[p][q]=(π/(α[p]+α[q]))**1.5
+                H[p][q]=3*α[p]*α[q]*pi**1.5/(α[p]+α[q])**2.5-4*pi/(α[p]+α[q])
+                S[p][q]=(pi/(α[p]+α[q]))**1.5
                 for r in range(N):
                         for s in range(N):
-                            Q[p][r][q][s]=2*π**2.5/((α[p]+α[q])*(α[r]+α[s])*(α[p]+α[q]+α[r]+α[s])**0.5)
+                            Q[p][r][q][s]=2*pi**2.5/((α[p]+α[q])*(α[r]+α[s])*(α[p]+α[q]+α[r]+α[s])**0.5)
 #%% Construction of a random C
 C=list(range(N))
 def norm(vec, mat):
