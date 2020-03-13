@@ -12,7 +12,7 @@ r= sym.Symbol('r')
 ψb_sym=sym.exp(-sym.sqrt((x-R)**2+r**2))/sym.sqrt(sym.pi)
 
 def Laplacian(f):
-    return sym.diff(sym.diff(f, x), x)
+    return sym.diff(sym.diff(f, x), x) + sym.diff(r*sym.diff(f, r), r)/r
 
 ψa=sym.lambdify([x, r], ψa_sym, "numpy")
 ψb=sym.lambdify([x, r], ψb_sym, "numpy")
