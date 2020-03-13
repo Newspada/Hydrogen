@@ -17,7 +17,7 @@ def Laplacian(f):
 ψa=sym.lambdify([x, r], ψa_sym, "numpy")
 ψb=sym.lambdify([x, r], ψb_sym, "numpy")
 Δψa=sym.lambdify([x, r], Laplacian(ψa_sym), "numpy")
-Δψb=sym.lambdify([x, r, Laplacian(ψb_sym), "numpy")
+Δψb=sym.lambdify([x, r], Laplacian(ψb_sym), "numpy")
 
 H=np.zeros((2, 2))
 S=np.zeros((2, 2))
