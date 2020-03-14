@@ -18,20 +18,10 @@ for i in range(N):
                 
 alpha, beta, vl, C, work, info = sp.linalg.lapack.zggev(H, S) # zggev is the function to perform the generalized eigenvalue problem
 E=(alpha/beta).real #the eigenvalues are actually real, but i casted them in real to avoid tedious warnings
-
-def sortIndex(array): #sort a list, but modify only the list of the indices
-    a=list(array)
-    L=list(range(len(a)))
-    repeat=True
-    while repeat:
-        repeat=False
-        for i in range(len(a)-1):
-            if a[i]>a[i+1]:
-                a[i], a[i+1]=a[i+1], a[i]
-                L[i], L[i+1]=L[i+1], L[i]
-                repeat=True
-    return L
-L=sortIndex(E) # I cannot change the original eigenvalue array, so I decided to reroll a "index" array
+L=list(range(N))
+def sortFunction(index):
+    return E[index]
+L.sort(key=sortFunction) # # sort a index array by the corrisponding E[index] value
 
 def eigenfunction(x, index):
     y=0

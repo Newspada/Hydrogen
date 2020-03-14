@@ -4,19 +4,6 @@ import scipy as sp
 from scipy import linalg
 from scipy import integrate
 import matplotlib.pyplot as plt
-
-def sortIndex(array):
-    a=list(array)
-    L=list(range(len(a)))
-    repeat=True
-    while repeat:
-        repeat=False
-        for i in range(len(a)-1):
-            if a[i]>a[i+1]:
-                a[i], a[i+1]=a[i+1], a[i]
-                L[i], L[i+1]=L[i+1], L[i]
-                repeat=True
-    return L
 #%% Construction of H, S and Q tensors                     
 #α=[0.298073, 1.242567, 5.782948, 38.474970]  # α (suggested α values)
 α=[0.01 * (10000)**(i/10) for i in range(10)] # α runs from 0.01 to 100 (geometric progression) 
@@ -58,7 +45,10 @@ while True:
 #%% Solving the generalized eigenvalue problem                            
     alpha, beta, vl, eigenvectors, work, info = sp.linalg.lapack.zggev(F, S) # zggev is the LAPACK function to perform the generalized eigenvalue problem
     eigenvalues=(alpha/beta).real #the eigenvalues are actually real, but i casted them explicitely real to avoid tedious warnings
-    L=sortIndex(eigenvalues) # I cannot change the original eigenvalue array, so I decided to reroll a "index" array
+    L=list(range(N))
+    def sortFunction(index):
+            return eigenvalues[index]
+    L.sort(key=sortFunction) # sort a index array by the corrisponding eigenvalue[index] value. L[0] will be the lowest eigenvalue index
     C=normalize(eigenvectors[:, L[0]].real, S) #the eigenvectors are actually real, but i casted them to real to avoid tedious warnings
 #%% Computing the energy mean value (different from the eigenvalue)
     E=0
